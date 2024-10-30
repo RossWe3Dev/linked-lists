@@ -84,4 +84,20 @@ class LinkedList
     end
     string + "(#{@tail.value}) -> nil"
   end
+
+  def insert_at(value, index)
+    node_at_current_index = at(index)
+    entry = Node.new(value, node_at_current_index)
+    if index.zero?
+      @head = entry
+      @size += 1
+    elsif index > size # or index.zero?
+      puts "Cannot insert at an index > than the list's current length"
+    else
+      previous_node = at(index - 1)
+      previous_node.next_node = entry
+      @tail = entry if previous_node == @tail
+      @size += 1
+    end
+  end
 end

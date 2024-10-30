@@ -10,25 +10,34 @@ list.append("snake")
 list.append("turtle")
 
 p list
-p list.size
+puts "\nsize = #{list.size}"
+print "\nhead = "
 p list.head
+print "\ntail = "
 p list.tail
-puts "\ntesting at()"
+puts "\ntesting #at()"
 p list.at(0)
 p list.at(1)
 p list.at(4)
-p list.at(7)
-puts "\ntesting pop()"
+p list.at(6)
+puts "\ntesting #pop()"
 list.pop
 p list
-puts "\ntesting contains?(value)"
+puts "\ntesting #contains?(value)"
 puts "List contains 'cat'?"
 p list.contains?("cat")
 puts "List contains 'elefant'?"
 p list.contains?("elefant")
-puts "\ntesting find(value)"
+puts "\ntesting #find(value)"
 list.find("cat")
 list.find("snake")
 list.find("elefant")
-puts "\ntesting #to_s"
+puts "\ntesting custom #to_s"
 puts list
+puts "\ntesting #insert_at(value, index)"
+list.insert_at("horse", 3)
+puts list
+list.insert_at("elefant", 7)
+list.insert_at("elefant", 6)
+puts list
+puts "\nsize is now = #{list.size}"
