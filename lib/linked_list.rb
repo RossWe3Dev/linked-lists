@@ -1,3 +1,5 @@
+require_relative "node"
+
 class LinkedList
   attr_reader :size, :head, :tail
 
@@ -12,7 +14,7 @@ class LinkedList
     if @head.nil?
       @head = entry
     else
-      @tail.next_node = entry.value # using .value for readability
+      @tail.next_node = entry # ditch .value to store node reference in next_node
     end
     @tail = entry
     @size += 1
@@ -23,29 +25,19 @@ class LinkedList
     if @head.nil?
       @tail = entry
     else
-      entry.next_node = @head.value # using .value for readability
+      entry.next_node = @head
     end
     @head = entry
     @size += 1
   end
-end
 
-class Node
-  attr_accessor :value, :next_node
+  def at(index)
+    return nil if index > size
 
-  def initialize(value = nil)
-    @value = value
-    @next_node = nil
+    current_node = @head
+    index.times do
+      current_node = current_node.next_node
+    end
+    current_node
   end
 end
-
-list = LinkedList.new
-
-list.append("cat")
-list.append("parrot")
-list.prepend("dog")
-
-p list
-p list.size
-p list.head
-p list.tail
