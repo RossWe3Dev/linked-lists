@@ -100,4 +100,19 @@ class LinkedList
       @size += 1
     end
   end
+
+  def remove_at(index)
+    node_at_current_index = at(index)
+    if index.zero?
+      @head = node_at_current_index.next_node
+      @size -= 1
+    elsif index >= size
+      puts "There are no items at index: #{index}"
+    else
+      previous_node = at(index - 1)
+      previous_node.next_node = node_at_current_index.next_node
+      @tail = previous_node if node_at_current_index == @tail
+      @size -= 1
+    end
+  end
 end

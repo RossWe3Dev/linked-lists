@@ -40,4 +40,10 @@ puts list
 list.insert_at("elefant", 7)
 list.insert_at("elefant", 6)
 puts list
-puts "\nsize is now = #{list.size}"
+puts "size is now = #{list.size}"
+puts "\ntesting #remove_at(index)"
+list.remove_at(4)
+puts list
+list.remove_at(5)
+puts list
+puts "size is now = #{list.size}"
