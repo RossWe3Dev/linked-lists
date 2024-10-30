@@ -61,4 +61,17 @@ class LinkedList
     end
     false
   end
+
+  def find(value, index = 0, current_node = @head)
+    begin
+      until current_node.value == value
+        current_node = current_node.next_node
+        index += 1
+      end
+    rescue StandardError
+      return puts "#{value} is not in the list"
+    end
+
+    puts "#{value} is at index: #{index}"
+  end
 end

@@ -26,3 +26,7 @@ puts "List contains 'cat'?"
 p list.contains?("cat")
 puts "List contains 'elefant'?"
 p list.contains?("elefant")
+puts "\ntesting find(value)"
+list.find("cat")
+list.find("snake")
+list.find("elefant")
