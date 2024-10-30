@@ -21,3 +21,8 @@ p list.at(7)
 puts "\ntesting pop()"
 list.pop
 p list
+puts "\ntesting contains?(value)"
+puts "List contains 'cat'?"
+p list.contains?("cat")
+puts "List contains 'elefant'?"
+p list.contains?("elefant")
