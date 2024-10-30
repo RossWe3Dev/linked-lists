@@ -30,3 +30,5 @@ puts "\ntesting find(value)"
 list.find("cat")
 list.find("snake")
 list.find("elefant")
+puts "\ntesting #to_s"
+puts list

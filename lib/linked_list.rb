@@ -74,4 +74,14 @@ class LinkedList
 
     puts "#{value} is at index: #{index}"
   end
+
+  def to_s
+    current_node = @head
+    string = ""
+    until current_node.next_node.nil?
+      string += "(#{current_node.value}) -> "
+      current_node = current_node.next_node
+    end
+    string + "(#{@tail.value}) -> nil"
+  end
 end
