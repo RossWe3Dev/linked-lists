@@ -1,12 +1,21 @@
 require_relative "node"
 
 class LinkedList
-  attr_reader :size, :head, :tail
+  attr_reader :head
 
   def initialize
     @head = nil
-    @tail = nil
-    @size = 0
+  end
+
+  def last_node?(node)
+    return true if node.next_node.nil?
+
+    false
+  end
+
+  def tail(current_node = @head)
+    current_node = current_node.next_node until last_node?(current_node)
+    current_node
   end
 
   def append(value)
@@ -14,21 +23,26 @@ class LinkedList
     if @head.nil?
       @head = entry
     else
-      @tail.next_node = entry
+      tail.next_node = entry
     end
-    @tail = entry
-    @size += 1
   end
 
   def prepend(value)
-    entry = Node.new(value)
-    if @head.nil?
-      @tail = entry
-    else
-      entry.next_node = @head
-    end
+    entry = Node.new(value, @head)
     @head = entry
-    @size += 1
+  end
+
+  def size
+    return 0 if @head.nil?
+
+    current_node = @head
+    counter = 1
+
+    until last_node?(current_node)
+      current_node = current_node.next_node
+      counter += 1
+    end
+    counter
   end
 
   def at(index)
@@ -45,16 +59,14 @@ class LinkedList
     return nil if size < 1
 
     current_node = @head
-    current_node = current_node.next_node until current_node.next_node == @tail
+    current_node = current_node.next_node until current_node.next_node == tail
 
-    @size -= 1
-    @tail = current_node
     current_node.next_node = nil
   end
 
   def contains?(value)
     current_node = @head
-    until current_node.next_node == @tail
+    until current_node.next_node == tail
       return true if current_node.value == value
 
       current_node = current_node.next_node
@@ -78,11 +90,11 @@ class LinkedList
   def to_s
     current_node = @head
     string = ""
-    until current_node.next_node.nil?
+    until last_node?(current_node)
       string += "(#{current_node.value}) -> "
       current_node = current_node.next_node
     end
-    string + "(#{@tail.value}) -> nil"
+    string + "(#{tail.value}) -> nil"
   end
 
   def insert_at(value, index)
@@ -90,14 +102,11 @@ class LinkedList
     entry = Node.new(value, node_at_current_index)
     if index.zero?
       @head = entry
-      @size += 1
-    elsif index > size # or index.zero?
+    elsif index > size
       puts "Cannot insert at an index > than the list's current length"
     else
       previous_node = at(index - 1)
       previous_node.next_node = entry
-      @tail = entry if previous_node == @tail
-      @size += 1
     end
   end
 
@@ -105,14 +114,11 @@ class LinkedList
     node_at_current_index = at(index)
     if index.zero?
       @head = node_at_current_index.next_node
-      @size -= 1
     elsif index >= size
       puts "There are no items at index: #{index}"
     else
       previous_node = at(index - 1)
       previous_node.next_node = node_at_current_index.next_node
-      @tail = previous_node if node_at_current_index == @tail
-      @size -= 1
     end
   end
 end
