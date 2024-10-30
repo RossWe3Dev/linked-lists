@@ -14,7 +14,7 @@ class LinkedList
     if @head.nil?
       @head = entry
     else
-      @tail.next_node = entry # ditch .value to store node reference in next_node
+      @tail.next_node = entry
     end
     @tail = entry
     @size += 1
@@ -39,5 +39,16 @@ class LinkedList
       current_node = current_node.next_node
     end
     current_node
+  end
+
+  def pop
+    return nil if size < 1
+
+    current_node = @head
+    current_node = current_node.next_node until current_node.next_node == @tail
+
+    @size -= 1
+    @tail = current_node
+    current_node.next_node = nil
   end
 end
