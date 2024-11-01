@@ -98,12 +98,13 @@ class LinkedList
   end
 
   def insert_at(value, index)
+    return puts "Cannot insert at an index > than the list's current length" if index.negative? || index > size
+
     node_at_current_index = at(index)
     entry = Node.new(value, node_at_current_index)
     if index.zero?
+      entry.next_node = @head
       @head = entry
-    elsif index > size
-      puts "Cannot insert at an index > than the list's current length"
     else
       previous_node = at(index - 1)
       previous_node.next_node = entry
